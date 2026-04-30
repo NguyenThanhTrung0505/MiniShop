@@ -54,7 +54,7 @@ const Home = (props) => {
         {
             id: 10,
             Name: "Phone",
-            Price: "12.789.000",
+            Price: "12.789.007",
         },
     ];
     return (
