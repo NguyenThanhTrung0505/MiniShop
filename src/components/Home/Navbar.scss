@@ -1,0 +1,14 @@
+.bg-light {
+    .navbar-brand {
+        margin-left: 4rem;
+    }
+    .navbar-collapse {
+        margin-left: 4rem;
+        .my-lg-0 {
+            justify-content: right;
+            margin-left: 46rem;
+            display: flex;
+            gap: 1em;
+        }
+    }
+}
