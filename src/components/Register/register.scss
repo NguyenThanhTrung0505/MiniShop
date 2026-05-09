@@ -1,0 +1,137 @@
+/* From Uiverse.io by Yaya12085 */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e8e8e8;
+    .form {
+        margin-bottom: 10rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+        .title {
+            font-size: 28px;
+            color: rgb(16, 137, 211);
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+
+            &::before,
+            &::after {
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                border-radius: 50%;
+                left: 0px;
+                background-color: rgb(16, 137, 211);
+            }
+
+            &::before {
+                width: 18px;
+                height: 18px;
+                background-color: royalblue;
+            }
+
+            &::after {
+                width: 18px;
+                height: 18px;
+                animation: pulse 1s linear infinite;
+            }
+        }
+        .message,
+        .signin {
+            color: rgba(88, 87, 87, 0.822);
+            font-size: 14px;
+        }
+        .signin {
+            text-align: center;
+            a {
+                color: royalblue;
+                &:hover {
+                    text-decoration: underline royalblue;
+                }
+            }
+        }
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
+        label {
+            position: relative;
+            .input {
+                width: 100%;
+                padding: 10px 10px 20px 10px;
+                outline: 0;
+                border: 1px solid rgba(105, 105, 105, 0.397);
+                border-radius: 10px;
+                & + span {
+                    position: absolute;
+                    left: 10px;
+                    top: 15px;
+                    color: grey;
+                    font-size: 0.9em;
+                    cursor: text;
+                    transition: 0.3s ease;
+                }
+                &:placeholder-shown + span {
+                    top: 15px;
+                    font-size: 0.9em;
+                }
+                &:focus + span,
+                &:valid + span {
+                    top: 30px;
+                    font-size: 0.7em;
+                    font-weight: 600;
+                }
+                &:valid + span {
+                    color: grey;
+                    font-size: 0.7em;
+                    font-weight: 600;
+                    margin-top: 0.3rem;
+                }
+            }
+        }
+        .submit {
+            border: none;
+            outline: none;
+            background: linear-gradient(
+                45deg,
+                rgb(16, 137, 211) 0%,
+                rgb(18, 177, 209) 100%
+            );
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s ease;
+
+            &:hover {
+                background-color: rgb(56, 90, 194);
+            }
+        }
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

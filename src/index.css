@@ -1,0 +1,19 @@
+/* src/index.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Cực kỳ quan trọng để không vỡ layout */
+}
+
+html,
+body {
+    overflow-x: hidden; /* Ngăn chặn cuộn ngang khi có phần tử tràn ra */
+    width: 100%;
+    font-size: 16px; /* Căn bản cho đơn vị rem */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

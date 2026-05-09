@@ -1,14 +1,109 @@
 .bg-light {
-    .navbar-brand {
-        margin-left: 4rem;
-    }
-    .navbar-collapse {
-        margin-left: 4rem;
-        .my-lg-0 {
-            justify-content: right;
-            margin-left: 46rem;
-            display: flex;
-            gap: 1em;
+    flex-direction: column;
+    .navbar-content-top {
+        width: 100vw;
+        display: flex;
+        gap: 4rem;
+        .navbar-brand {
+            margin-left: 4rem;
+        }
+        .navbar-collapse {
+            margin-left: 13rem;
+            justify-content: center;
+            gap: 4rem;
+            justify-content: space-around;
+            .navbar-nav {
+                gap: 2rem;
+                .nav-item {
+                    .nav-link {
+                        svg {
+                            height: 1.5rem;
+                            width: 1.5rem;
+                            margin-bottom: 0.3rem;
+                        }
+                    }
+                }
+            }
+            .navbar-seacrh {
+                display: flex;
+                line-height: 28px;
+                align-items: center;
+                position: relative;
+                width: 30vw;
+                max-width: 35vw;
+
+                .input {
+                    width: 100%;
+                    height: 40px;
+                    line-height: 28px;
+                    padding: 0 1rem;
+                    padding-left: 2.5rem;
+                    border: 2px solid transparent;
+                    border-radius: 8px;
+                    outline: none;
+                    background-color: #f3f3f4;
+                    color: #0d0c22;
+                    transition: 0.3s ease;
+
+                    &::placeholder {
+                        color: #9e9ea7;
+                    }
+
+                    &:focus,
+                    &:hover {
+                        outline: none;
+                        border-color: rgba(234, 76, 137, 0.4);
+                        background-color: #fff;
+                        box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+                    }
+                }
+                .icon {
+                    position: absolute;
+                    left: 1rem;
+                    margin-bottom: 0.7rem;
+                    fill: #9e9ea7;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                }
+                .my-lg-0 {
+                    display: flex;
+                }
+            }
         }
     }
+    .navbar-content-bottom {
+        display: flex;
+        .navbar-nav {
+            justify-content: space-around;
+            width: 85vw;
+            margin-top: 1rem;
+            .nav-item {
+                display: flex;
+                .nav-link {
+                    svg {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        margin-bottom: 0.3rem;
+                        margin-right: 0.1rem;
+                    }
+                    &:hover {
+                        background-color: rgb(161, 210, 252);
+                        border-radius: 1rem;
+                    }
+                }
+                span {
+                    height: 1.3rem;
+                    width: 1.3rem;
+                    margin-top: 0.3rem;
+                }
+            }
+        }
+    }
+}
+img {
+    height: fit-content;
+    width: fit-content;
+}
+#nav-dropdown-dark-example {
+    padding-left: 0;
 }

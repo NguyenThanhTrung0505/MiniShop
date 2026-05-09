@@ -2,77 +2,107 @@ import { NavLink } from "react-bootstrap";
 import "./Navbar.scss";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.webp";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { CiSearch } from "react-icons/ci";
+import { IoPersonOutline } from "react-icons/io5";
+import { LiaShoppingCartSolid } from "react-icons/lia";
+import { FaHome } from "react-icons/fa";
+import { TiDocumentText } from "react-icons/ti";
+import { MdOutlineSell } from "react-icons/md";
+import { BsFire } from "react-icons/bs";
+import { RiAdminFill } from "react-icons/ri";
+import { ImGift } from "react-icons/im";
 const Navbar = (props) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">
-                    CatTV
-                </Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div
-                    className="collapse navbar-collapse"
-                    id="navbarSupportedContent"
-                >
+                <div className="navbar-content-top">
+                    <Link className="navbar-brand" to="/">
+                        {/* <img src={logo} alt="logo" /> */}
+                        CatTV
+                        <br />
+                        Mua sắm thả ga
+                    </Link>
+                    <div
+                        className="collapse navbar-collapse"
+                        id="navbarSupportedContent"
+                    >
+                        <div className="navbar-seacrh">
+                            <span className="icon">
+                                <CiSearch />
+                            </span>
+                            <input
+                                placeholder="Hôm nay bạn muốn mua gì"
+                                type="search"
+                                className="input"
+                            />
+                        </div>
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active">
+                                <Link to="/login" className="nav-link">
+                                    <IoPersonOutline /> Đăng nhập
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/shopping-cart" className="nav-link">
+                                    <LiaShoppingCartSolid /> Giỏ hàng
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="navbar-content-bottom">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <Link to="/home" className="nav-link">
-                                Home
+                            <Link to="/" className="nav-link">
+                                <FaHome></FaHome>Trang chủ
+                            </Link>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <span>
+                                <ImGift />
+                            </span>
+                            <NavDropdown
+                                id="nav-dropdown-dark-example"
+                                title="Sản phẩm"
+                            >
+                                <NavDropdown.Item href="#action/3.1">
+                                    Action
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">
+                                    Another action
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">
+                                    Something
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/order" className="nav-link">
+                                <TiDocumentText />
+                                Đơn hàng
+                            </Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/sell" className="nav-link">
+                                <MdOutlineSell />
+                                Mã giảm giá
+                            </Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/hot-search" className="nav-link">
+                                <BsFire></BsFire>
+                                Thịnh hành
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/admin" className="nav-link">
+                                <RiAdminFill />
                                 Admin
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <Dropdown>
-                                <Dropdown.Toggle
-                                    variant="success"
-                                    id="dropdown-basic"
-                                >
-                                    Cài đặt
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} to="/action1">
-                                        Action
-                                    </Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/action2">
-                                        Another action
-                                    </Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/action3">
-                                        Something else
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                        <input
-                            className="form-control mr-sm-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button
-                            className="btn btn-outline-success my-2 my-sm-0"
-                            type="submit"
-                        >
-                            Search
-                        </button>
-                    </form>
                 </div>
             </nav>
         </>
