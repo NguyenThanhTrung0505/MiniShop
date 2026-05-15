@@ -1,26 +1,42 @@
 .bg-light {
+    box-sizing: border-box;
     flex-direction: column;
+    width: 100%;
     .navbar-content-top {
-        width: 100vw;
+        width: 100%;
         display: flex;
-        gap: 4rem;
+        margin-top: 1rem;
         .navbar-brand {
-            margin-left: 4rem;
+            margin-left: 2rem;
+            @media (max-width: 768px) {
+                display: none;
+            }
         }
         .navbar-collapse {
-            margin-left: 13rem;
             justify-content: center;
-            gap: 4rem;
-            justify-content: space-around;
+            @media (max-width: 992px) {
+                display: flex;
+            }
             .navbar-nav {
-                gap: 2rem;
+                gap: 1rem;
+                @media (max-width: 992px) {
+                    display: flex;
+                    flex-direction: row;
+                }
                 .nav-item {
                     .nav-link {
+                        padding: 0;
+
                         svg {
                             height: 1.5rem;
                             width: 1.5rem;
                             margin-bottom: 0.3rem;
                         }
+                    }
+                }
+                #nav-link-login {
+                    @media (max-width: 576px) {
+                        display: none;
                     }
                 }
             }
@@ -29,8 +45,16 @@
                 line-height: 28px;
                 align-items: center;
                 position: relative;
-                width: 30vw;
-                max-width: 35vw;
+                width: 40vw;
+                // max-width: 40vw;
+                margin-left: auto;
+                @media (max-width: 992px) {
+                    margin-left: 0;
+                }
+                @media (max-width: 576px) {
+                    width: 100%;
+                    margin-left: 1rem;
+                }
 
                 .input {
                     width: 100%;
@@ -68,6 +92,32 @@
                 .my-lg-0 {
                     display: flex;
                 }
+            }
+        }
+        #navbar-top-right {
+            margin-right: 2rem;
+            justify-content: end;
+            @media (max-width: 992px) {
+                flex: 0 0 auto !important;
+            }
+            @media (max-width: 768px) {
+                width: 40%;
+            }
+            @media (max-width: 576px) {
+                width: 25%;
+                margin-right: 1rem;
+            }
+        }
+        #navbarSupportedContent {
+            @media (max-width: 992px) {
+                // margin-left: 2rem;
+                justify-content: center;
+            }
+            @media (max-width: 768px) {
+                width: 60%;
+            }
+            @media (max-width: 576px) {
+                width: 75%;
             }
         }
     }

@@ -38,8 +38,13 @@ const Navbar = (props) => {
                                 className="input"
                             />
                         </div>
+                    </div>
+                    <div
+                        className="collapse navbar-collapse"
+                        id="navbar-top-right"
+                    >
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
+                            <li className="nav-item active" id="nav-link-login">
                                 <Link to="/login" className="nav-link">
                                     <IoPersonOutline /> Đăng nhập
                                 </Link>
@@ -53,7 +58,7 @@ const Navbar = (props) => {
                     </div>
                 </div>
                 <div className="navbar-content-bottom">
-                    <ul className="navbar-nav mr-auto">
+                    <ul className="navbar-nav mr-auto flex-row">
                         <li className="nav-item active">
                             <Link to="/" className="nav-link">
                                 <FaHome></FaHome>Trang chủ
@@ -97,7 +102,10 @@ const Navbar = (props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/admin" className="nav-link">
+                            <Link
+                                to="/admin"
+                                className="nav-link d-lg-flex d-none"
+                            >
                                 <RiAdminFill />
                                 Admin
                             </Link>

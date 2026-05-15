@@ -11,6 +11,7 @@ import { MdOutlinePayment } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import testPicture from "../../../assets/sg-11134201-7rblg-llyqam7r7ymddd.jpg";
 import { LiaShoppingCartSolid } from "react-icons/lia";
+import Image from "react-bootstrap/Image";
 const Content = (props) => {
     const { listProduct, count, setCount } = props;
     const handleCountProduct = () => {
@@ -19,7 +20,7 @@ const Content = (props) => {
     return (
         <div className="home-container">
             <div className="home-picture">
-                <img src={background}></img>
+                <Image src={background} fluid></Image>
             </div>
             <div className="home-title">
                 <Card style={{ width: "18rem" }}>
@@ -227,8 +228,26 @@ const Content = (props) => {
                     </Card>
                 </div>
             </div>
-
-            <div className="home-content">
+            <div className="home-product">
+                <h5 className="home-bestselling-text">Sản phẩm 📦</h5>
+                <div className="home-bestselling-card">
+                    <Card style={{ width: "12rem" }}>
+                        <Card.Img variant="top" src={testPicture} />
+                        <Card.Body>
+                            <div>
+                                <Card.Title>Gấu bông</Card.Title>
+                                <Card.Text>199.000đ</Card.Text>
+                            </div>
+                            <div className="btn-buy">
+                                <Button variant="primary">
+                                    <LiaShoppingCartSolid />
+                                </Button>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </div>
+            </div>
+            {/* <div className="home-product">
                 {listProduct.map((value) => (
                     <div key={value.id}>
                         <Card style={{ width: "18rem" }}>
@@ -250,7 +269,7 @@ const Content = (props) => {
                         </Card>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };

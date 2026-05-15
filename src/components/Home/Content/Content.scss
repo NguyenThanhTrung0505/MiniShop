@@ -1,5 +1,6 @@
 .home-container {
     margin-top: 1rem;
+    margin-bottom: 2rem;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -70,7 +71,8 @@
             }
         }
     }
-    .home-bestselling {
+    .home-bestselling,
+    .home-product {
         text-align: start;
         width: 80vw;
         .home-bestselling-card {
@@ -109,27 +111,27 @@
             }
         }
     }
-    .home-content {
-        display: flex;
-        flex: 1;
-        flex-wrap: wrap;
-        gap: 0.7em;
-        margin: 2rem 10rem;
-        border: 1px solid blue;
-        height: fit-content;
-        width: 80rem;
-        padding: 2em;
-        border-radius: 1em;
-        align-items: center;
-        justify-content: left;
-        .card {
-            height: 20rem;
-            width: 12rem !important;
-            background-color: antiquewhite;
-            border-radius: 0.8em;
-        }
-        // .home-content-card {
-        //     width: 18rem;
-        // }
-    }
+    // .home-product {
+    //     display: flex;
+    //     flex: 1;
+    //     flex-wrap: wrap;
+    //     gap: 0.7em;
+    //     margin: 2rem 10rem;
+    //     border: 1px solid blue;
+    //     height: fit-content;
+    //     width: 80rem;
+    //     padding: 2em;
+    //     border-radius: 1em;
+    //     align-items: center;
+    //     justify-content: left;
+    //     .card {
+    //         height: 20rem;
+    //         width: 12rem !important;
+    //         background-color: antiquewhite;
+    //         border-radius: 0.8em;
+    //     }
+    // .home-content-card {
+    //     width: 18rem;
+    // }
+    // }
 }
