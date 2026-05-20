@@ -12,11 +12,9 @@ import { BiSupport } from "react-icons/bi";
 import testPicture from "../../../assets/sg-11134201-7rblg-llyqam7r7ymddd.jpg";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import Image from "react-bootstrap/Image";
+import axios from "axios";
 const Content = (props) => {
-    const { listProduct, count, setCount } = props;
-    const handleCountProduct = () => {
-        setCount((prev) => prev + 1);
-    };
+    const { products } = props;
     return (
         <div className="home-container">
             <div className="home-picture">
@@ -100,176 +98,36 @@ const Content = (props) => {
                             </div>
                         </Card.Body>
                     </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
-                            </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
                 </div>
             </div>
             <div className="home-product">
                 <h5 className="home-bestselling-text">Sản phẩm 📦</h5>
                 <div className="home-bestselling-card">
-                    <Card style={{ width: "12rem" }}>
-                        <Card.Img variant="top" src={testPicture} />
-                        <Card.Body>
-                            <div>
-                                <Card.Title>Gấu bông</Card.Title>
-                                <Card.Text>199.000đ</Card.Text>
+                    {products.map((p) => {
+                        return (
+                            <div className="home-product-card" key={p.id}>
+                                <Card style={{ width: "12rem" }}>
+                                    <Card.Img
+                                        variant="top"
+                                        src={`http://localhost:3000/uploads/${p.image}`}
+                                    />
+                                    <Card.Body>
+                                        <div>
+                                            <Card.Title>{p.name}</Card.Title>
+                                            <Card.Text>{p.price}</Card.Text>
+                                        </div>
+                                        <div className="btn-buy">
+                                            <Button variant="primary">
+                                                <LiaShoppingCartSolid />
+                                            </Button>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
                             </div>
-                            <div className="btn-buy">
-                                <Button variant="primary">
-                                    <LiaShoppingCartSolid />
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
+                        );
+                    })}
                 </div>
             </div>
-            {/* <div className="home-product">
-                {listProduct.map((value) => (
-                    <div key={value.id}>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>{value.Name}</Card.Title>
-                                <Card.Text>{value.Price}</Card.Text>
-                                <NavLink to="/buyproduct" className="nav-link">
-                                    <Button variant="primary">Mua ngay</Button>
-                                </NavLink>
-                                <br></br>
-                                <Button
-                                    variant="primary"
-                                    onClick={() => handleCountProduct()}
-                                >
-                                    Thêm vào giỏ hàng
-                                </Button>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                ))}
-            </div> */}
         </div>
     );
 };

@@ -1,70 +1,45 @@
 import Content from "./Content/Content";
 import Navbar from "./Navbar";
-import { useState, createContext } from "react";
-
+import { useState, createContext, useEffect } from "react";
+import axios from "axios";
+import "./Home.scss";
 const countProductPerson = createContext(null);
 const Home = (props) => {
-    const [count, setCount] = useState(0);
-    const productArr = [
-        {
-            id: 1,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 2,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 3,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 4,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 5,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 6,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 7,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 8,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 9,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-        {
-            id: 10,
-            Name: "Phone",
-            Price: "12.789.000",
-        },
-    ];
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const fetchAllProducts = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:3000/products",
+                );
+                setProducts(response.data.data);
+            } catch (error) {
+                console.error("Lỗi lấy dữ liệu:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchAllProducts();
+    }, []);
+    if (loading) {
+        return (
+            <div className="home-loader">
+                <div className="wrapper">
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="shadow"></div>
+                    <div className="shadow"></div>
+                    <div className="shadow"></div>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="home">
             <div>
-                <Content
-                    listProduct={productArr}
-                    count={count}
-                    setCount={setCount}
-                />
+                <Content products={products} />
             </div>
         </div>
     );

@@ -15,10 +15,11 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />}>
-                <Route index element={<Home />} />
+                <Route path="home" element={<Home />} />
                 <Route path="/buyproduct" element={<BuyProduct />} />
-                <Route path="/admin" element={<Admin />}></Route>
             </Route>
+            <Route path="/admin" element={<Admin />}></Route>
+
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
         </Routes>

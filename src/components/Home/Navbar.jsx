@@ -14,16 +14,31 @@ import { BsFire } from "react-icons/bs";
 import { RiAdminFill } from "react-icons/ri";
 import { ImGift } from "react-icons/im";
 const Navbar = (props) => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    const username = localStorage.getItem("username");
+    const handleLogout = () => {
+        localStorage.clear;
+        // window.location.reload();
+    };
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-content-top">
-                    <Link className="navbar-brand" to="/">
-                        {/* <img src={logo} alt="logo" /> */}
-                        CatTV
-                        <br />
-                        Mua sắm thả ga
-                    </Link>
+                    {token ? (
+                        <Link className="navbar-brand" to="/">
+                            Xin chào
+                            <br />
+                            {username}
+                        </Link>
+                    ) : (
+                        <Link className="navbar-brand" to="/">
+                            {/* <img src={logo} alt="logo" /> */}
+                            CatTV
+                            <br />
+                            Mua sắm thả ga
+                        </Link>
+                    )}
                     <div
                         className="collapse navbar-collapse"
                         id="navbarSupportedContent"
@@ -45,9 +60,19 @@ const Navbar = (props) => {
                     >
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active" id="nav-link-login">
-                                <Link to="/login" className="nav-link">
-                                    <IoPersonOutline /> Đăng nhập
-                                </Link>
+                                {token ? (
+                                    <Link
+                                        to="/login"
+                                        className="nav-link"
+                                        onClick={handleLogout}
+                                    >
+                                        <IoPersonOutline /> Đăng xuất
+                                    </Link>
+                                ) : (
+                                    <Link to="/login" className="nav-link">
+                                        <IoPersonOutline /> Đăng nhập
+                                    </Link>
+                                )}
                             </li>
                             <li className="nav-item">
                                 <Link to="/shopping-cart" className="nav-link">
@@ -79,7 +104,7 @@ const Navbar = (props) => {
                                     Another action
                                 </NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">
-                                    Something
+                                    Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </li>
@@ -101,15 +126,17 @@ const Navbar = (props) => {
                                 Thịnh hành
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/admin"
-                                className="nav-link d-lg-flex d-none"
-                            >
-                                <RiAdminFill />
-                                Admin
-                            </Link>
-                        </li>
+                        {token && role === "admin" && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/admin"
+                                    className="nav-link d-lg-flex d-none"
+                                >
+                                    <RiAdminFill />
+                                    Admin
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>

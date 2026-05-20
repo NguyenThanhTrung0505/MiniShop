@@ -83,49 +83,6 @@
                 }
             }
         }
-        .social-account-container {
-            margin-top: 25px;
-            .title {
-                display: block;
-                text-align: center;
-                font-size: 10px;
-                color: rgb(170, 170, 170);
-            }
-            .social-accounts {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                gap: 15px;
-                margin-top: 5px;
-                .social-button {
-                    background: linear-gradient(
-                        45deg,
-                        rgb(0, 0, 0) 0%,
-                        rgb(112, 112, 112) 100%
-                    );
-                    border: 5px solid white;
-                    padding: 5px;
-                    border-radius: 50%;
-                    width: 40px;
-                    aspect-ratio: 1;
-                    display: grid;
-                    place-content: center;
-                    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px
-                        10px -8px;
-                    transition: all 0.2s ease-in-out;
-                    &:hover {
-                        transform: scale(1.2);
-                    }
-                    &:active {
-                        transform: scale(0.9);
-                    }
-                    .svg {
-                        fill: white;
-                        margin: auto;
-                    }
-                }
-            }
-        }
         .agreement {
             display: block;
             text-align: center;
@@ -133,7 +90,7 @@
             a {
                 text-decoration: none;
                 color: #0099ff;
-                font-size: 9px;
+                font-size: 1rem;
             }
         }
     }

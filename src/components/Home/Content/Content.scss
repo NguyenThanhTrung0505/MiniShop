@@ -73,7 +73,8 @@
     }
     .home-bestselling,
     .home-product {
-        text-align: start;
+        // text-align: start;
+        display: grid;
         width: 80vw;
         .home-bestselling-card {
             margin-top: 1rem;
@@ -111,27 +112,4 @@
             }
         }
     }
-    // .home-product {
-    //     display: flex;
-    //     flex: 1;
-    //     flex-wrap: wrap;
-    //     gap: 0.7em;
-    //     margin: 2rem 10rem;
-    //     border: 1px solid blue;
-    //     height: fit-content;
-    //     width: 80rem;
-    //     padding: 2em;
-    //     border-radius: 1em;
-    //     align-items: center;
-    //     justify-content: left;
-    //     .card {
-    //         height: 20rem;
-    //         width: 12rem !important;
-    //         background-color: antiquewhite;
-    //         border-radius: 0.8em;
-    //     }
-    // .home-content-card {
-    //     width: 18rem;
-    // }
-    // }
 }
