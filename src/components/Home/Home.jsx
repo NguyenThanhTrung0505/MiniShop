@@ -1,8 +1,8 @@
 import Content from "./Content/Content";
-import Navbar from "./Navbar";
 import { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import "./Home.scss";
+import { Outlet } from "react-router-dom";
 const countProductPerson = createContext(null);
 const Home = (props) => {
     const [products, setProducts] = useState([]);

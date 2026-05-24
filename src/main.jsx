@@ -11,17 +11,75 @@ import Admin from "./components/Admin/Admin.jsx";
 import BuyProduct from "./components/Home/BuyProduct/BuyProduct.jsx";
 import Login from "./components/login/login.jsx";
 import Register from "./components/Register/register.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/protectedRoute.jsx";
+import EditProduct from "./components/Admin/editProduct.jsx";
+import ProductById from "./components/Home/ProductById/productById.jsx";
+import OrderProduct from "./components/Home/OrderProduct/orderProduct.jsx";
+import CartShopping from "./components/Home/Cart/cart.jsx";
 createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />}>
-                <Route path="home" element={<Home />} />
-                <Route path="/buyproduct" element={<BuyProduct />} />
-            </Route>
-            <Route path="/admin" element={<Admin />}></Route>
-
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <App />
+                    </ProtectedRoute>
+                }
+            >
+                <Route
+                    path="home/:id"
+                    element={
+                        <ProtectedRoute>
+                            <ProductById />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="home/order"
+                    element={
+                        <ProtectedRoute>
+                            <OrderProduct />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="home/cart"
+                    element={
+                        <ProtectedRoute>
+                            <CartShopping />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path="home" element={<Home />} />
+                <Route
+                    path="buyproduct"
+                    element={
+                        <ProtectedRoute>
+                            <BuyProduct />
+                        </ProtectedRoute>
+                    }
+                />
+            </Route>
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedRoute requireAdmin={true}>
+                        <Admin />
+                    </ProtectedRoute>
+                }
+            ></Route>
+            <Route
+                path="/admin/edit-product/:id"
+                element={
+                    <ProtectedRoute requireAdmin={true}>
+                        <EditProduct />
+                    </ProtectedRoute>
+                }
+            ></Route>
+            <Route path="*" element={<Login />} />
         </Routes>
     </BrowserRouter>,
 );

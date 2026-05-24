@@ -13,8 +13,13 @@ import testPicture from "../../../assets/sg-11134201-7rblg-llyqam7r7ymddd.jpg";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Content = (props) => {
     const { products } = props;
+    const navigate = useNavigate();
+    const handleGoToProduct = (id) => {
+        navigate(`/home/${id}`);
+    };
     return (
         <div className="home-container">
             <div className="home-picture">
@@ -105,8 +110,17 @@ const Content = (props) => {
                 <div className="home-bestselling-card">
                     {products.map((p) => {
                         return (
-                            <div className="home-product-card" key={p.id}>
-                                <Card style={{ width: "12rem" }}>
+                            <div
+                                className="home-product-card"
+                                key={p.id}
+                                onClick={() => handleGoToProduct(p.id)}
+                            >
+                                <Card
+                                    style={{
+                                        width: "12rem",
+                                        height: "17.5rem",
+                                    }}
+                                >
                                     <Card.Img
                                         variant="top"
                                         src={`http://localhost:3000/uploads/${p.image}`}

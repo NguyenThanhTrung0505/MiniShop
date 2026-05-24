@@ -1,3 +1,41 @@
+.nav-back-home {
+    margin: 1rem 0rem;
+    button {
+        display: flex;
+        height: 3em;
+        width: 11rem;
+        align-items: center;
+        justify-content: center;
+        background-color: #eeeeee4b;
+        border-radius: 3px;
+        letter-spacing: 1px;
+        transition: all 0.2s linear;
+        cursor: pointer;
+        border: none;
+        background: #fff;
+        div {
+            margin-right: 5px;
+            margin-left: 5px;
+            font-size: 20px;
+            transition: all 0.4s ease-in;
+            margin-bottom: 0.2rem;
+        }
+        span {
+            font-weight: bold;
+        }
+        &:hover > div {
+            font-size: 1.2em;
+            transform: translateX(-5px);
+        }
+
+        &:hover {
+            box-shadow:
+                9px 9px 33px #d1d1d1,
+                -9px -9px 33px #ffffff;
+            transform: translateY(-2px);
+        }
+    }
+}
 .admin-create-product {
     display: flex;
     flex-direction: column;

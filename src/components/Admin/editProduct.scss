@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+    .edit-product-container {
+        background-color: #e8e8e8;
+        height: 100vh;
+        width: 100vw;
+        .nav-back-admin {
+            padding-top: 1rem;
+            button {
+                display: flex;
+                height: 3em;
+                width: 11rem;
+                align-items: center;
+                justify-content: center;
+                background-color: #eeeeee4b;
+                border-radius: 3px;
+                letter-spacing: 1px;
+                transition: all 0.2s linear;
+                cursor: pointer;
+                border: none;
+                background: #fff;
+                div {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                    font-size: 20px;
+                    transition: all 0.4s ease-in;
+                    margin-bottom: 0.2rem;
+                }
+                span {
+                    font-weight: bold;
+                }
+                &:hover > div {
+                    font-size: 1.2em;
+                    transform: translateX(-5px);
+                }
+
+                &:hover {
+                    box-shadow:
+                        9px 9px 33px #d1d1d1,
+                        -9px -9px 33px #ffffff;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+        .edit-product-form {
+            width: 50vw;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #ffffff;
+            box-shadow:
+                0px 187px 75px rgba(0, 0, 0, 0.01),
+                0px 105px 63px rgba(0, 0, 0, 0.05),
+                0px 47px 47px rgba(0, 0, 0, 0.09),
+                0px 12px 26px rgba(0, 0, 0, 0.1),
+                0px 0px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            Form {
+                display: grid;
+                grid-template-columns: repeat(2 1fr);
+                gap: 1rem 1rem;
+                .row {
+                    .rounded {
+                        object-fit: cover;
+                        height: 18rem;
+                        width: 18rem;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    .col {
+                        .form-control {
+                            background-color: #f2f2f2;
+                        }
+                    }
+                    .my-1 {
+                        width: 100%;
+                        text-align: center;
+                        .btn {
+                            width: 40%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

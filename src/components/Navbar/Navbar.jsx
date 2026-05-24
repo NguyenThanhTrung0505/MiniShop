@@ -13,26 +13,57 @@ import { MdOutlineSell } from "react-icons/md";
 import { BsFire } from "react-icons/bs";
 import { RiAdminFill } from "react-icons/ri";
 import { ImGift } from "react-icons/im";
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Navbar = (props) => {
+    // const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    const [totalProducts, setTotalProducts] = useState(0);
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
     const username = localStorage.getItem("username");
+    const fetchTotalProducts = async () => {
+        const userId = localStorage.getItem("userId");
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/home/cart/total-products",
+                {
+                    params: {
+                        userId: userId,
+                    },
+
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+            setTotalProducts(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const handleLogout = () => {
-        localStorage.clear;
+        localStorage.clear();
         // window.location.reload();
     };
+    useEffect(() => {
+        fetchTotalProducts();
+    }, [totalProducts]);
+    if (totalProducts === null) {
+        return <div>Đang lấy dữ liệu ...</div>;
+    }
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-content-top">
                     {token ? (
-                        <Link className="navbar-brand" to="/">
+                        <Link className="navbar-brand" to="/home">
                             Xin chào
                             <br />
                             {username}
                         </Link>
                     ) : (
-                        <Link className="navbar-brand" to="/">
+                        <Link className="navbar-brand" to="/home">
                             {/* <img src={logo} alt="logo" /> */}
                             CatTV
                             <br />
@@ -75,8 +106,14 @@ const Navbar = (props) => {
                                 )}
                             </li>
                             <li className="nav-item">
-                                <Link to="/shopping-cart" className="nav-link">
-                                    <LiaShoppingCartSolid /> Giỏ hàng
+                                <Link to="/home/cart" className="nav-link">
+                                    <div className="cart-icon-wrapper">
+                                        <LiaShoppingCartSolid className="icon-cart" />
+                                        <span className="cart-badge">
+                                            {totalProducts}
+                                        </span>
+                                    </div>
+                                    <span className="cart-text">Giỏ hàng</span>
                                 </Link>
                             </li>
                         </ul>
@@ -85,17 +122,19 @@ const Navbar = (props) => {
                 <div className="navbar-content-bottom">
                     <ul className="navbar-nav mr-auto flex-row">
                         <li className="nav-item active">
-                            <Link to="/" className="nav-link">
+                            <Link to="/home" className="nav-link">
                                 <FaHome></FaHome>Trang chủ
                             </Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <span>
-                                <ImGift />
-                            </span>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
-                                title="Sản phẩm"
+                                title={
+                                    <span className="dropdown-title-custom">
+                                        <ImGift />
+                                        <span>Sản phẩm</span>
+                                    </span>
+                                }
                             >
                                 <NavDropdown.Item href="#action/3.1">
                                     Action

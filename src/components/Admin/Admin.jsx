@@ -4,19 +4,24 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import "./Admin.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import axios from "axios";
 import { PiNotePencilBold } from "react-icons/pi";
 import { MdDelete } from "react-icons/md";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { IoArrowBackOutline } from "react-icons/io5";
 import Image from "react-bootstrap/Image";
+import { useNavigate } from "react-router-dom";
 const Admin = (props) => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState(null);
+    const fileInputRef = useRef(null);
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem("token");
         if (name.length === 0) {
             toast.error("You have not enter name");
             return;
@@ -30,14 +35,17 @@ const Admin = (props) => {
             return;
         }
         const formData = new FormData();
+        formData.append("name", name);
+        formData.append("price", price);
         formData.append("image", image);
         try {
             const response = await axios.post(
-                "http://localhost:3000/uploads",
+                "http://localhost:3000/products",
                 formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
                     },
                 },
             );
@@ -45,26 +53,32 @@ const Admin = (props) => {
             setName("");
             setPrice("");
             setImage(null);
-        } catch (error) {
-            console.log(error);
-            toast.error("Upload fail");
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
+            handleAllProduct();
+        } catch (err) {
+            toast.error(err.response?.data?.error || "Không thể thêm!");
         }
     };
     const [products, setProducts] = useState([]);
+    const handleAllProduct = async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/products");
+            setProducts(response.data.data);
+        } catch (error) {
+            console.error(error);
+            toast.error("Don't fetch all products");
+        }
+    };
     useEffect(() => {
-        const handleAllProduct = async () => {
-            try {
-                const response = await axios.get(
-                    "http://localhost:3000/products",
-                );
-                setProducts(response.data.data);
-                toast.success("Success get all products");
-            } catch (error) {
-                console.error(error);
-                toast.error("Do not get all products");
-            }
-        };
-        handleAllProduct();
+        try {
+            handleAllProduct();
+            toast.success("Success get all products");
+        } catch (err) {
+            console.log(err);
+            toast.error("Don't get all products");
+        }
     }, []);
     const handleEditProduct = () => {};
     const handledDeleteProduct = async (id) => {
@@ -79,12 +93,28 @@ const Admin = (props) => {
                 },
             );
             toast.success(response.data.message);
+            handleAllProduct();
         } catch (err) {
             toast.error(err.response?.data?.error || "Không thể xóa!");
         }
     };
+    const navigate = useNavigate();
+    const handleGoToHome = () => {
+        navigate("/home");
+    };
+    const handleGoToEditProduct = (id) => {
+        navigate(`/admin/edit-product/${id}`);
+    };
     return (
         <>
+            <div className="nav-back-home">
+                <button onClick={handleGoToHome}>
+                    <div>
+                        <IoArrowBackOutline />
+                    </div>
+                    <span>Back home 🏠</span>
+                </button>
+            </div>
             <Form className="admin-create-product mt-4" onSubmit={handleSubmit}>
                 <Row>
                     <Form.Label column lg={2}>
@@ -94,6 +124,7 @@ const Admin = (props) => {
                         <Form.Control
                             type="text"
                             placeholder="Name"
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </Col>
@@ -106,6 +137,7 @@ const Admin = (props) => {
                         <Form.Control
                             type="text"
                             placeholder="Price"
+                            value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </Col>
@@ -117,6 +149,7 @@ const Admin = (props) => {
                     <Col>
                         <Form.Control
                             type="file"
+                            ref={fileInputRef}
                             onChange={(e) => setImage(e.target.files[0])}
                         />
                     </Col>
@@ -152,7 +185,11 @@ const Admin = (props) => {
                                         />
                                     </td>
                                     <td className="admin-active">
-                                        <span>
+                                        <span
+                                            onClick={() =>
+                                                handleGoToEditProduct(e.id)
+                                            }
+                                        >
                                             <PiNotePencilBold className="admin-active-edit" />
                                         </span>
                                         <span

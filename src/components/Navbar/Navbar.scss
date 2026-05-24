@@ -25,7 +25,36 @@
                 }
                 .nav-item {
                     .nav-link {
-                        padding: 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        .cart-icon-wrapper {
+                            position: relative;
+                            display: inline-flex;
+                            .icon-cart {
+                                height: 1.8rem;
+                                width: 1.8rem;
+                                margin-bottom: 0;
+                            }
+
+                            .cart-badge {
+                                position: absolute;
+                                top: -5px;
+                                right: -8px;
+                                background-color: #894c5c;
+                                color: white;
+                                font-size: 0.7rem;
+                                font-weight: 600;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 1.2rem;
+                                min-width: 1.2rem;
+                                border-radius: 50px;
+                                padding: 0 0.3rem;
+                                box-shadow: 0 2px 5px rgba(137, 76, 92, 0.4);
+                            }
+                        }
 
                         svg {
                             height: 1.5rem;
@@ -130,6 +159,8 @@
             .nav-item {
                 display: flex;
                 .nav-link {
+                    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+                    border-radius: 1rem;
                     svg {
                         height: 1.5rem;
                         width: 1.5rem;
@@ -138,7 +169,7 @@
                     }
                     &:hover {
                         background-color: rgb(161, 210, 252);
-                        border-radius: 1rem;
+                        transform: scale(1.05);
                     }
                 }
                 span {
@@ -155,5 +186,14 @@ img {
     width: fit-content;
 }
 #nav-dropdown-dark-example {
-    padding-left: 0;
+    // padding-left: 0;
+    .dropdown-title-custom {
+        span {
+            margin-left: 0.1em;
+        }
+        svg {
+            margin-bottom: 0.5rem;
+            height: 1.3rem;
+        }
+    }
 }

@@ -9,15 +9,19 @@ const Login = () => {
     const [error, setError] = useState("");
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log(username, password);
         try {
             const response = await axios.post("http://localhost:3000/login", {
                 username,
                 password,
             });
-            const { token, role } = response.data.data;
+            const { token, role, id } = response.data.data;
+
+            console.log(response.data.data);
+            console.log("id ne: ", id);
+
             localStorage.setItem("token", token);
             localStorage.setItem("role", role);
+            localStorage.setItem("userId", id);
             localStorage.setItem("username", username);
             toast.success("Đăng nhập thành công");
             setTimeout(() => {
