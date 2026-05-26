@@ -65,7 +65,7 @@ const Admin = (props) => {
     const handleAllProduct = async () => {
         try {
             const response = await axios.get("http://localhost:3000/products");
-            setProducts(response.data.data);
+            setProducts(response.data.data.data);
         } catch (error) {
             console.error(error);
             toast.error("Don't fetch all products");
@@ -73,7 +73,7 @@ const Admin = (props) => {
     };
     useEffect(() => {
         try {
-            handleAllProduct();
+            // handleAllProduct();
             toast.success("Success get all products");
         } catch (err) {
             console.log(err);
@@ -160,6 +160,9 @@ const Admin = (props) => {
                     </Col>
                 </Row>
             </Form>
+            <Button type="button" onClick={() => handleAllProduct()}>
+                Show All Products
+            </Button>
             <div className="admin-table-products col-11">
                 <Table striped bordered hover>
                     <thead>

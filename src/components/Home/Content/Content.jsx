@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Content.scss";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -14,18 +14,30 @@ import { LiaShoppingCartSolid } from "react-icons/lia";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { formatVND } from "../../../utils/formatters";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Content = (props) => {
     const { products } = props;
     const navigate = useNavigate();
     const handleGoToProduct = (id) => {
         navigate(`/home/${id}`);
     };
+    const handleGoToProductPage = () => {
+        navigate("/home/products");
+    };
+    useEffect(() => {
+        AOS.init({ duration: 1500 });
+    }, []);
+    if (!products) {
+        return <div>đang lấy dữ liệu ...</div>;
+    }
     return (
         <div className="home-container">
             <div className="home-picture">
                 <Image src={background} fluid></Image>
             </div>
-            <div className="home-title">
+            <div className="home-title" data-aos="fade-up">
                 <Card style={{ width: "18rem" }}>
                     <Card.Body>
                         <FaTruckFast />
@@ -64,8 +76,10 @@ const Content = (props) => {
                 </Card>
             </div>
             <div className="home-outstanding">
-                <h5 className="home-outstanding-text">Danh mục nổi bật ⭐</h5>
-                <div className="home-outstanding-card">
+                <h5 className="home-outstanding-text" data-aos="fade-up">
+                    Danh mục nổi bật ⭐
+                </h5>
+                <div className="home-outstanding-card" data-aos="fade-up">
                     <div className="card" id="card1">
                         <h5>Quần áo</h5>
                     </div>
@@ -87,9 +101,27 @@ const Content = (props) => {
                 </div>
             </div>
             <div className="home-bestselling">
-                <h5 className="home-bestselling-text">Sản phẩm bán chạy 🔥</h5>
-                <div className="home-bestselling-card">
-                    <Card style={{ width: "12rem" }}>
+                <div className="home-bestselling-text">
+                    <h3
+                        className="home-bestselling-left-text"
+                        data-aos="fade-up"
+                    >
+                        Sản phẩm bán chạy 🔥
+                    </h3>
+                    <button
+                        className="learn-more"
+                        onClick={() => handleGoToProductPage()}
+                        data-aos="fade-up"
+                    >
+                        <span className="circle" aria-hidden="true">
+                            <span className="icon arrow"></span>
+                        </span>
+                        <span className="button-text">Xem thêm</span>
+                    </button>
+                </div>
+
+                <div className="home-bestselling-card" data-aos="fade-up">
+                    <Card style={{ width: "15rem", height: "20.5rem" }}>
                         <Card.Img variant="top" src={testPicture} />
                         <Card.Body>
                             <div>
@@ -106,7 +138,24 @@ const Content = (props) => {
                 </div>
             </div>
             <div className="home-product">
-                <h5 className="home-bestselling-text">Sản phẩm 📦</h5>
+                <div className="home-bestselling-text">
+                    <h3
+                        className="home-bestselling-left-text"
+                        data-aos="fade-up"
+                    >
+                        Sản phẩm 📦
+                    </h3>
+                    <button
+                        className="learn-more"
+                        onClick={() => handleGoToProductPage()}
+                        data-aos="fade-up"
+                    >
+                        <span className="circle" aria-hidden="true">
+                            <span className="icon arrow"></span>
+                        </span>
+                        <span className="button-text">Xem thêm</span>
+                    </button>
+                </div>
                 <div className="home-bestselling-card">
                     {products.map((p) => {
                         return (
@@ -114,11 +163,12 @@ const Content = (props) => {
                                 className="home-product-card"
                                 key={p.id}
                                 onClick={() => handleGoToProduct(p.id)}
+                                data-aos="fade-up"
                             >
                                 <Card
                                     style={{
-                                        width: "12rem",
-                                        height: "17.5rem",
+                                        width: "15rem",
+                                        height: "20.5rem",
                                     }}
                                 >
                                     <Card.Img
@@ -127,8 +177,12 @@ const Content = (props) => {
                                     />
                                     <Card.Body>
                                         <div>
-                                            <Card.Title>{p.name}</Card.Title>
-                                            <Card.Text>{p.price}</Card.Text>
+                                            <Card.Title className="truncate-text">
+                                                {p.name}
+                                            </Card.Title>
+                                            <Card.Text>
+                                                {formatVND(p.price)}
+                                            </Card.Text>
                                         </div>
                                         <div className="btn-buy">
                                             <Button variant="primary">

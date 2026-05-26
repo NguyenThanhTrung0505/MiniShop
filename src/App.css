@@ -1,0 +1,11 @@
+/* Đảm bảo chỉ có 1 thanh cuộn dọc hoạt động */
+html {
+    overflow-y: auto;
+    overflow-x: hidden; /* Giữ lại cái này cho AOS hoạt động tốt */
+}
+
+body {
+    /* Ép thẻ body không được phép tự tạo thanh cuộn riêng nữa */
+    overflow-y: visible !important;
+    overflow-x: hidden;
+}

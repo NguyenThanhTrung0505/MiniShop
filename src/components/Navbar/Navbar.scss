@@ -105,9 +105,11 @@
                     &:focus,
                     &:hover {
                         outline: none;
-                        border-color: rgba(234, 76, 137, 0.4);
+                        // border-color: rgba(234, 76, 137, 0.4);
+                        border-color: rgba(76, 234, 226, 0.4);
                         background-color: #fff;
-                        box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+                        // box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+                        box-shadow: 0 0 0 4px rgb(76 234 226 / 10%);
                     }
                 }
                 .icon {

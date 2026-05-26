@@ -1,0 +1,169 @@
+$primary-color: #282936;
+$text-muted: #a0a2b1;
+$accent-aqua: aqua;
+$hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+.main-footer {
+    background-color: $primary-color;
+    color: #ffffff;
+    padding: 3.5rem 0 1.5rem 0;
+    width: 100%;
+    margin-top: auto; /* Đẩy xuống đáy trang khi dùng flex column ở component cha */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    width: 80vw; /* Đảm bảo tỷ lệ 80vw đồng bộ với .home-container của bạn */
+    margin: 0 auto;
+}
+
+.footer-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.footer-col {
+    h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        position: relative;
+        color: #ffffff;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.4rem;
+            width: 2.5rem;
+            height: 2px;
+            background-color: $accent-aqua;
+        }
+    }
+
+    p {
+        color: $text-muted;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+}
+
+.brand-col {
+    .footer-logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+
+        span {
+            color: $accent-aqua;
+        }
+    }
+    .footer-desc {
+        max-width: 90%;
+    }
+}
+
+.links-col {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 0.75rem;
+
+            a {
+                color: $text-muted;
+                text-decoration: none;
+                transition: $hover-transition;
+                font-size: 0.95rem;
+                display: inline-block;
+
+                &:hover {
+                    color: $accent-aqua;
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}
+
+.social-col {
+    .social-icons {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: 1.2rem;
+
+        a {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+            width: 2.8rem;
+            height: 2.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: $hover-transition;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            svg {
+                transition: $hover-transition;
+            }
+
+            &:hover {
+                background: rgba(0, 255, 255, 0.08);
+                border-color: $accent-aqua;
+                color: $accent-aqua;
+                transform: translateY(-4px);
+                box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+
+                &.icon-github svg { transform: rotate(12deg); }
+                &.icon-facebook svg { transform: scale(1.1); }
+                &.icon-discord svg { transform: rotate(-12deg); }
+            }
+        }
+    }
+}
+
+.footer-bottom {
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    p {
+        color: $text-muted;
+        font-size: 0.875rem;
+    }
+
+    .developer-tag {
+        span {
+            color: #ffffff;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            
+            &:hover {
+                color: $accent-aqua;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+        text-align: center;
+    }
+}

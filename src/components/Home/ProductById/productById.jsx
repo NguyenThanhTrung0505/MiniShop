@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import { formatVND } from "../../../utils/formatters";
 const productById = (props) => {
     const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState("");
@@ -77,7 +78,7 @@ const productById = (props) => {
                         <FormGroup className="product-intro">
                             <h4>{product[0].name}</h4>
                             <h4 className="product-price">
-                                {product[0].price}
+                                {formatVND(product[0].price)}
                             </h4>
                             <FormLabel>Vận chuyển</FormLabel>
                             <FormText>Từ 7-14 ngày</FormText>
@@ -143,9 +144,6 @@ const productById = (props) => {
                     </Form>
                 </div>
             </div>
-            <footer>
-                <p>ha</p>
-            </footer>
             <ToastContainer
                 position="top-right"
                 autoClose={1500}

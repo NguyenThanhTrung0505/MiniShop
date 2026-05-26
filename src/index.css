@@ -6,11 +6,17 @@
     box-sizing: border-box; /* Cực kỳ quan trọng để không vỡ layout */
 }
 
-html,
-body {
-    overflow-x: hidden; /* Ngăn chặn cuộn ngang khi có phần tử tràn ra */
+html {
     width: 100%;
     font-size: 16px; /* Căn bản cho đơn vị rem */
+    overflow-y: auto; /* Duy trì 1 thanh cuộn dọc duy nhất cho toàn trang */
+    overflow-x: hidden; /* Bắt buộc để AOS không gây tràn biên ngang */
+}
+
+body {
+    /* Ép thẻ body không được phép tự tạo thanh cuộn riêng nữa */
+    overflow-y: visible !important;
+    overflow-x: hidden;
 }
 
 img {

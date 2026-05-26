@@ -11,7 +11,7 @@ const Home = (props) => {
         const fetchAllProducts = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:3000/products",
+                    `http://localhost:3000/products?page=3&limit=5`,
                 );
                 setProducts(response.data.data);
             } catch (error) {
@@ -39,7 +39,7 @@ const Home = (props) => {
     return (
         <div className="home">
             <div>
-                <Content products={products} />
+                <Content products={products.data} />
             </div>
         </div>
     );

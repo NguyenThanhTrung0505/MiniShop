@@ -16,6 +16,7 @@ import EditProduct from "./components/Admin/editProduct.jsx";
 import ProductById from "./components/Home/ProductById/productById.jsx";
 import OrderProduct from "./components/Home/OrderProduct/orderProduct.jsx";
 import CartShopping from "./components/Home/Cart/cart.jsx";
+import Products from "./components/Home/Products/products.jsx";
 createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <Routes>
@@ -50,6 +51,14 @@ createRoot(document.getElementById("root")).render(
                     element={
                         <ProtectedRoute>
                             <CartShopping />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="home/products"
+                    element={
+                        <ProtectedRoute>
+                            <Products />
                         </ProtectedRoute>
                     }
                 />

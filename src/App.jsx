@@ -6,7 +6,7 @@ import Home from "./components/Home/Home";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-
+import Footer from "./components/Footer/Footer";
 const App = () => {
     // const [cart, setCart] = useState([]);
     // const addToCart = (product, quantity) => {
@@ -38,6 +38,7 @@ const App = () => {
             <div className="main-container">
                 <Outlet></Outlet>
             </div>
+            <Footer></Footer>
         </div>
     );
 };
