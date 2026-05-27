@@ -27,7 +27,7 @@ const Content = (props) => {
         navigate("/home/products");
     };
     useEffect(() => {
-        AOS.init({ duration: 1500 });
+        AOS.init({ duration: 1000, offset: 0 });
     }, []);
     if (!products) {
         return <div>đang lấy dữ liệu ...</div>;

@@ -86,7 +86,7 @@ const cartShopping = () => {
     };
     useEffect(() => {
         fetchProductsInCart();
-        AOS.init({ duration: 1000 });
+        AOS.init({ duration: 1000, offset: 0 });
     }, []);
     if (products.length === 0) {
         <div>Loading data ... </div>;

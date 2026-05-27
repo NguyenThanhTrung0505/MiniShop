@@ -1,9 +1,15 @@
 import React from "react";
 import "./Footer.scss";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const Footer = () => {
+    useEffect(() => {
+        AOS.init({ duration: 1000, offset: 0 });
+    }, []);
     return (
-        <footer className="main-footer">
+        <footer className="main-footer" data-aos="fade-up">
             <div className="footer-container">
                 <div className="footer-row">
                     {/* Cột 1: Giới thiệu thương hiệu */}
@@ -23,13 +29,13 @@ const Footer = () => {
                         <h3>Khám Phá</h3>
                         <ul>
                             <li>
-                                <a href="/">Trang chủ</a>
+                                <a href="/home">Trang chủ</a>
                             </li>
                             <li>
-                                <a href="/products">Sản phẩm</a>
+                                <a href="/home/products">Sản phẩm</a>
                             </li>
                             <li>
-                                <a href="/cart">Giỏ hàng</a>
+                                <a href="/home/cart">Giỏ hàng</a>
                             </li>
                             <li>
                                 <a href="/orders">Đơn hàng</a>
@@ -78,7 +84,7 @@ const Footer = () => {
                                 </svg>
                             </a>
                             <a
-                                href="https://discord.com"
+                                href="https://discord.gg/zCyC7Sda"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="icon-discord"

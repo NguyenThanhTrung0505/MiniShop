@@ -8,6 +8,9 @@ import { useState, useEffect } from "react";
 import Pagination from "react-bootstrap/Pagination";
 import { formatVND } from "../../../utils/formatters";
 import axios from "axios";
+import "aos/dist/aos.css";
+import AOS from "aos";
+
 const getAllProducts = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
@@ -32,6 +35,14 @@ const getAllProducts = () => {
     useEffect(() => {
         fetchProducts();
     }, [page]);
+    useEffect(() => {
+        AOS.init({
+            offset: 200,
+            duration: 1000,
+            easing: "ease-in-sine",
+            delay: 100,
+        });
+    }, []);
     if (!products) {
         <div>Loading data ...</div>;
     }
@@ -44,6 +55,7 @@ const getAllProducts = () => {
                         style={{ width: "12rem" }}
                         key={p.id}
                         onClick={() => handleGoToProduct(p.id)}
+                        data-aos="fade-up"
                     >
                         <Card.Img
                             variant="top"

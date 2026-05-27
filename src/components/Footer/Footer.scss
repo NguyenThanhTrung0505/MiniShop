@@ -41,7 +41,7 @@ $hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         color: #ffffff;
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -0.4rem;
@@ -129,9 +129,15 @@ $hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
                 transform: translateY(-4px);
                 box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
 
-                &.icon-github svg { transform: rotate(12deg); }
-                &.icon-facebook svg { transform: scale(1.1); }
-                &.icon-discord svg { transform: rotate(-12deg); }
+                &.icon-github svg {
+                    transform: rotate(12deg);
+                }
+                &.icon-facebook svg {
+                    transform: scale(1.1);
+                }
+                &.icon-discord svg {
+                    transform: rotate(-12deg);
+                }
             }
         }
     }
@@ -155,7 +161,7 @@ $hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             color: #ffffff;
             font-weight: 600;
             transition: color 0.3s ease;
-            
+
             &:hover {
                 color: $accent-aqua;
             }
