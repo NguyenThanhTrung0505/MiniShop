@@ -84,6 +84,9 @@ const cartShopping = () => {
     const handleGoToHome = () => {
         navigate("/home");
     };
+    const handleGoToOrder = () => {
+        navigate("/home/order");
+    };
     useEffect(() => {
         fetchProductsInCart();
         AOS.init({ duration: 1000, offset: 0 });
@@ -224,8 +227,11 @@ const cartShopping = () => {
                                         <p>Đã bao gồm VAT</p>
                                     </div>
                                 </div>
-                                <Button className="go-to-payment">
-                                    Mua ngay <FaArrowRight />
+                                <Button
+                                    className="go-to-payment"
+                                    onClick={() => handleGoToOrder()}
+                                >
+                                    Thanh toán <FaArrowRight />
                                 </Button>
                                 <Button
                                     className="go-to-shopping"

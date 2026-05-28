@@ -1,0 +1,96 @@
+.order-page {
+    box-sizing: border-box;
+    background-color: #f9f9ff;
+    width: 100vw;
+    padding-bottom: 4rem;
+    .order-page-content {
+        width: 80%;
+        display: flex;
+        gap: 2rem;
+        margin: 0rem auto;
+        .order-page-content-left {
+            width: 70%;
+            .method-transport {
+                .transport-base,
+                .transport-flash {
+                    background-color: #f9f9ff;
+                    border: 1px solid #dedfea;
+                    border-radius: 1rem;
+                    display: flex;
+                    gap: 1rem;
+                    padding: 1rem;
+                    .method-transport-radio,
+                    .method-flash-radio {
+                        display: flex;
+                        align-items: center;
+                        .form-check-input {
+                            height: 1.5rem;
+                            width: 1.5rem;
+                        }
+                    }
+                    .transport-base-text,
+                    .transport-flash-text {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex: 1;
+                        p {
+                            font-weight: 600;
+                            margin-bottom: 0;
+                            p {
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+                .transport-base {
+                    margin-bottom: 1rem;
+                }
+            }
+            .method-payment {
+                .list-group {
+                    // border: 1px solid #dedfea;
+                    border-radius: 1rem;
+                    .list-group-item {
+                        display: flex;
+                        gap: 1.5rem;
+                        padding: 1rem;
+                        // border: 1px solid #dedfea;
+                        .method-payment-radio {
+                            display: flex;
+                            align-items: center;
+                            .form-check-input {
+                                height: 1.3rem;
+                                width: 1.3rem;
+                            }
+                        }
+                        .method-payment-text {
+                            font-weight: 600;
+                            font-size: medium;
+                            svg {
+                                margin-right: 0.5rem;
+                                margin-bottom: 0.3rem;
+                                height: 1.5rem;
+                                width: 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+            h4 {
+                margin-top: 4rem;
+                margin-bottom: 2rem;
+            }
+        }
+        .order-page-content-right {
+            width: 30%;
+            margin-top: 4rem;
+            .card {
+                background-color: #f3f4f6;
+                width: 100%;
+                .card-body {
+                }
+            }
+        }
+    }
+}
