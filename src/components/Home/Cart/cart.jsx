@@ -16,7 +16,8 @@ const cartShopping = () => {
     const [products, setProducts] = useState([]);
     const [productsPrice, setProductsPrice] = useState([]);
     const [tempPrice, setTempPrice] = useState(0);
-    const [shippingFree, setShippingFree] = useState(0);
+    const [shippingFree, setShippingFree] = useState(30000);
+    const [productsId, setProductsId] = useState([]);
     const navigate = useNavigate();
     const typingTimeoutRef = useRef({});
     const fetchProductsInCart = async () => {
@@ -72,19 +73,21 @@ const cartShopping = () => {
             handleChangeQuantity(productId, 1);
         }
     };
-    const handleChooseProducts = (price, quantity) => {
+    const handleChooseProducts = (price, quantity, id) => {
         setTempPrice(parseInt(price * quantity) * 1000 + tempPrice);
-        setShippingFree(shippingFree + 10000 * parseInt(quantity));
+        const newProduct = { id, quantity };
+        setProductsId((prev) => [...prev, newProduct]);
     };
 
-    const handleDechooseProducts = (price, quantity) => {
+    const handleDechooseProducts = (price, quantity, id) => {
         setTempPrice(tempPrice - parseInt(price * quantity) * 1000);
-        setShippingFree(shippingFree - 10000 * parseInt(quantity));
+        setProductsId((prevId) => prevId.filter((item) => item.id !== id));
     };
     const handleGoToHome = () => {
         navigate("/home");
     };
     const handleGoToOrder = () => {
+        sessionStorage.setItem("productsId", JSON.stringify(productsId));
         navigate("/home/order");
     };
     useEffect(() => {
@@ -117,10 +120,12 @@ const cartShopping = () => {
                                                 ? handleChooseProducts(
                                                       p.price,
                                                       p.quantity,
+                                                      p.id,
                                                   )
                                                 : handleDechooseProducts(
                                                       p.price,
                                                       p.quantity,
+                                                      p.id,
                                                   )
                                         }
                                     />
@@ -207,7 +212,11 @@ const cartShopping = () => {
                                     </div>
                                     <div className="payment-content-right-top">
                                         <p>{formatVND(tempPrice)}</p>
-                                        <p>{formatVND(shippingFree)}</p>
+                                        <p>
+                                            {tempPrice === 0
+                                                ? formatVND(0)
+                                                : formatVND(shippingFree)}
+                                        </p>
                                         <p>Đã bao gồm</p>
                                     </div>
                                 </div>
@@ -220,9 +229,11 @@ const cartShopping = () => {
                                     </div>
                                     <div className="payment-content-right-bottom">
                                         <p>
-                                            {formatVND(
-                                                tempPrice + shippingFree,
-                                            )}
+                                            {tempPrice == 0
+                                                ? formatVND(0)
+                                                : formatVND(
+                                                      tempPrice + shippingFree,
+                                                  )}
                                         </p>
                                         <p>Đã bao gồm VAT</p>
                                     </div>
