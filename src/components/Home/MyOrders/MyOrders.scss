@@ -1,0 +1,67 @@
+.my-orders-container {
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    .order-header {
+        text-align: left;
+        width: 100%;
+        h1 {
+            font-size: xx-large;
+            font-weight: 700;
+        }
+        p {
+            margin-bottom: 0;
+            font-size: large;
+        }
+    }
+    .order-status {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .order-status-button {
+            button {
+                padding: 0.3rem;
+                border-radius: 1rem;
+                margin-right: 0.5rem;
+                border: none;
+                font-weight: 600;
+                color: #454754f7;
+                background-color: #e2e8f8;
+                &:hover {
+                    background-color: #cad5f0;
+                }
+                &:active {
+                    color: #a8b8ff;
+                    background-color: #1e40af;
+                }
+            }
+        }
+        .order-status-search {
+            // background-color: rgb(240, 243, 255);
+            border-color: #1e40af;
+
+            span {
+                position: absolute;
+                right: 31rem;
+                top: 50%;
+                transform: translateY(-10%);
+                pointer-events: none;
+                color: #888;
+                font-size: large;
+            }
+            input {
+                background-color: rgb(240, 243, 255);
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-right: 3rem;
+                padding-left: 3rem;
+                border: none;
+                border-radius: 0.5rem;
+                font-size: large;
+            }
+        }
+    }
+}

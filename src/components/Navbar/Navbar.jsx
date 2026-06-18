@@ -1,7 +1,11 @@
 import { NavLink } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import "./Navbar.scss";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.webp";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { CiSearch } from "react-icons/ci";
@@ -15,12 +19,15 @@ import { RiAdminFill } from "react-icons/ri";
 import { ImGift } from "react-icons/im";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import testPricturte from "../../assets/sg-11134201-7rblg-llyqam7r7ymddd.jpg";
 const Navbar = (props) => {
-    // const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     const [totalProducts, setTotalProducts] = useState(0);
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
     const username = localStorage.getItem("username");
+    const [products, setProducts] = useState([]);
+    const [hideSearch, setHideSearch] = useState(true);
+    const navigate = useNavigate();
     const fetchTotalProducts = async () => {
         const userId = localStorage.getItem("userId");
         try {
@@ -41,9 +48,37 @@ const Navbar = (props) => {
             console.log(error);
         }
     };
+    const fetchSearchProducts = async (e) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:3000/products/name?page=1&limit=10&search=${e}`,
+            );
+            setProducts(response.data.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleInput = (e) => {
+        setTimeout(() => fetchSearchProducts(e), 1000);
+        setHideSearch(false);
+    };
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            handleOnclickSearch(e.target.value);
+        }
+    };
+    const handleOnclickSearch = (value) => {
+        setHideSearch(true);
+        navigate("./home/products", { state: value });
+    };
     const handleLogout = () => {
         localStorage.clear();
         // window.location.reload();
+    };
+    const handleHileSearch = () => {
+        setTimeout(() => {
+            setHideSearch(true);
+        }, 100);
     };
     useEffect(() => {
         fetchTotalProducts();
@@ -51,7 +86,6 @@ const Navbar = (props) => {
     if (totalProducts === null) {
         return <div>Đang lấy dữ liệu ...</div>;
     }
-
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,6 +116,10 @@ const Navbar = (props) => {
                                 placeholder="Hôm nay bạn muốn mua gì"
                                 type="search"
                                 className="input"
+                                onChange={(e) => handleInput(e.target.value)}
+                                onBlur={() => handleHileSearch()}
+                                onClick={() => setHideSearch(false)}
+                                onKeyDown={(e) => handleEnter(e)}
                             />
                         </div>
                     </div>
@@ -177,6 +215,24 @@ const Navbar = (props) => {
                             </li>
                         )}
                     </ul>
+                </div>
+                <div className={hideSearch ? "d-none" : "products-search"}>
+                    <Container>
+                        {products?.length === 0 || !products ? (
+                            <p>Không tìm thấy sản phẩm</p>
+                        ) : (
+                            products.map((v) => (
+                                <p
+                                    key={v.id}
+                                    onMouseDown={(e) =>
+                                        handleOnclickSearch(v.name)
+                                    }
+                                >
+                                    {v.name}
+                                </p>
+                            ))
+                        )}
+                    </Container>
                 </div>
             </nav>
         </>

@@ -14,6 +14,7 @@ import { MdLock } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatVND } from "../../../utils/formatters";
+import { useNavigate } from "react-router-dom";
 
 const orderProduct = (props) => {
     const [products, setProducts] = useState([]);
@@ -35,20 +36,51 @@ const orderProduct = (props) => {
                 (response) => response.data.data,
             );
             setProducts(fetchedProducts);
+            setProducts((prev) =>
+                prev.map((e) => [
+                    {
+                        ...e,
+                        price: parseInt(e.price) * e.quantity * 1000,
+                    },
+                ]),
+            );
         } catch (error) {
             console.log(error);
         }
     };
     const totalPrice = products.reduce((total, p) => {
         const price = p[0].price || 0;
-        const quantity = p[0].quantity || 0;
-        return total + price * quantity * 1000;
+        return total + price;
     }, 0);
     const handleRadioChangePayment = (e) => {
         setPaymentMethod(e.target.value);
     };
     const handleRadioChangeTransport = (e) => {
         setTransportMethod(e.target.value);
+    };
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        data.transport = transportMethod;
+        data.payment = paymentMethod;
+        try {
+            const userId = localStorage.getItem("userId");
+            const totalPriceOrder =
+                transportMethod === "base"
+                    ? freeTransportBase + totalPrice
+                    : freeTransportFlash + totalPrice;
+            const response = await axios.post("http://localhost:3000/order", {
+                userId,
+                totalPriceOrder,
+                products,
+                data,
+            });
+            navigate("/home/orders");
+        } catch (error) {
+            console.log(error);
+        }
     };
     useEffect(() => {
         fetchProducts();
@@ -62,13 +94,14 @@ const orderProduct = (props) => {
                 <div className="order-page-content-left">
                     <div className="infomation-shipping">
                         <h4>Thông tin giao hàng</h4>
-                        <Form>
+                        <Form id="productInfo" onSubmit={handleSubmit}>
                             <Row className="mb-3">
                                 <Form.Group as={Col}>
                                     <Form.Label>Họ và tên</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Nguyễn Văn A"
+                                        name="name"
                                     />
                                 </Form.Group>
                             </Row>
@@ -77,12 +110,18 @@ const orderProduct = (props) => {
                                 controlId="formGridAddress1"
                             >
                                 <Form.Label>Địa chỉ</Form.Label>
-                                <Form.Control placeholder="Số nhà, Tên đường, Phường/Xã" />
+                                <Form.Control
+                                    placeholder="Số nhà, Tên đường, Phường/Xã"
+                                    name="address"
+                                />
                             </Form.Group>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridState">
                                     <Form.Label>Tỉnh/Thành phố</Form.Label>
-                                    <Form.Select defaultValue="Chọn Tỉnh/Thành phố">
+                                    <Form.Select
+                                        defaultValue="Chọn Tỉnh/Thành phố"
+                                        name="city"
+                                    >
                                         <option>Chọn Tỉnh/Thành phố</option>
                                         <option>Tây Ninh</option>
                                         <option>Đồng nai</option>
@@ -93,6 +132,7 @@ const orderProduct = (props) => {
                                     <Form.Control
                                         type="text"
                                         placeholder="090 123 4567"
+                                        name="phone"
                                     />
                                 </Form.Group>
                             </Row>
@@ -101,6 +141,7 @@ const orderProduct = (props) => {
                                 <Form.Control
                                     type="email"
                                     placeholder="email@example.com"
+                                    name="email"
                                 />
                             </Form.Group>
                         </Form>
@@ -221,7 +262,6 @@ const orderProduct = (props) => {
                                     <Col xs={6} md={3}>
                                         <Image
                                             src={`http://localhost:3000/uploads/${p[0].image}`}
-                                            // src={testPicture}
                                             rounded
                                         />
                                     </Col>
@@ -293,6 +333,8 @@ const orderProduct = (props) => {
                             </div>
                             <Button
                                 variant="primary"
+                                type="submit"
+                                form="productInfo"
                                 // style={{ backgroundColor: "#1e40af" }}
                             >
                                 {" "}

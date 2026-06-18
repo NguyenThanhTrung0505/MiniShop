@@ -29,7 +29,7 @@ const editProduct = (props) => {
             const response = await axios.get(
                 `http://localhost:3000/products/${id}`,
             );
-            await setProduct(response.data.data);
+            setProduct(response.data.data);
         } catch (error) {
             console.log(error);
             toast.error("Lỗi không lấy được dữ liệu");
@@ -78,9 +78,9 @@ const editProduct = (props) => {
         fetchProductById(id);
     }, []);
     useEffect(() => {
-        if (product && product.length > 0) {
-            setName(product[0].name);
-            setPrice(product[0].price);
+        if (product) {
+            setName(product.name);
+            setPrice(product.price);
         }
     }, [product]);
     if (!product) {
@@ -106,7 +106,7 @@ const editProduct = (props) => {
                                 Name
                             </Form.Label>
                             <Form.Control
-                                defaultValue={product[0].name}
+                                defaultValue={product.name}
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </Col>
@@ -115,7 +115,7 @@ const editProduct = (props) => {
                                 Price
                             </Form.Label>
                             <Form.Control
-                                defaultValue={product[0].price}
+                                defaultValue={product.price}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                         </Col>
@@ -127,12 +127,12 @@ const editProduct = (props) => {
                                 ref={fileRef}
                                 onChange={(e) => setImage(e.target.files[0])}
                             />
-                            <Form.Text>File name: {product[0].image}</Form.Text>
+                            <Form.Text>File name: {product.image}</Form.Text>
                         </Col>
                     </Row>
                     <Row>
                         <Image
-                            src={`http://localhost:3000/uploads/${product[0].image}`}
+                            src={`http://localhost:3000/uploads/${product.image}`}
                             rounded
                         />
                     </Row>

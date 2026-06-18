@@ -67,7 +67,7 @@ const productById = (props) => {
                         <Row>
                             <Col xs={12} md={12}>
                                 <Image
-                                    src={`http://localhost:3000/uploads/${product[0].image}`}
+                                    src={`http://localhost:3000/uploads/${product.image}`}
                                     thumbnail
                                     className="w-100"
                                 />
@@ -76,9 +76,9 @@ const productById = (props) => {
                     </Container>
                     <Form>
                         <FormGroup className="product-intro">
-                            <h4>{product[0].name}</h4>
+                            <h4>{product.name}</h4>
                             <h4 className="product-price">
-                                {formatVND(product[0].price)}
+                                {formatVND(product.price)}
                             </h4>
                             <FormLabel>Vận chuyển</FormLabel>
                             <FormText>Từ 7-14 ngày</FormText>

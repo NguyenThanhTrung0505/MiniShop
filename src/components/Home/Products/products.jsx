@@ -10,13 +10,16 @@ import { formatVND } from "../../../utils/formatters";
 import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
-
+import { useLocation } from "react-router-dom";
 const getAllProducts = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
-    const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const navigate = useNavigate();
+    const location = useLocation();
+    const [search, setSearch] = useState(() =>
+        location.state ? location.state : "",
+    );
     const fetchProducts = async () => {
         try {
             const response = await axios.get(
@@ -43,6 +46,9 @@ const getAllProducts = () => {
             delay: 100,
         });
     }, []);
+    useEffect(() => {
+        setSearch(location.state);
+    }, [location.state]);
     if (!products) {
         <div>Loading data ...</div>;
     }

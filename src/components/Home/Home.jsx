@@ -11,7 +11,7 @@ const Home = (props) => {
         const fetchAllProducts = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/products?page=3&limit=5`,
+                    `http://localhost:3000/products?page=3&limit=10`,
                 );
                 setProducts(response.data.data);
             } catch (error) {

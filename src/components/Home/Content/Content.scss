@@ -201,7 +201,7 @@ $hover-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
         .home-bestselling-card {
             margin-top: 1rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+            grid-template-columns: repeat(5, minmax(12rem, 1fr));
             // grid-template-columns: repeat(6, 1fr);
             // display: flex;
             // flex: 1;

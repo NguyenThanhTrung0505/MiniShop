@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import Pagination from "react-bootstrap/Pagination";
 import "./Admin.scss";
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
@@ -13,11 +14,17 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoArrowBackOutline } from "react-icons/io5";
 import Image from "react-bootstrap/Image";
 import { useNavigate } from "react-router-dom";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import { formatVND } from "../../utils/formatters";
 const Admin = (props) => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState(null);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [search, setSearch] = useState("");
     const fileInputRef = useRef(null);
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,7 +71,11 @@ const Admin = (props) => {
     const [products, setProducts] = useState([]);
     const handleAllProduct = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/products");
+            const response = await axios.get(
+                `http://localhost:3000/products?page=${page}&limit=10&search=${search}`,
+            );
+            setTotalPages(response.data.data.pagination.totalPages);
+            setPage(response.data.data.pagination.currentPage);
             setProducts(response.data.data.data);
         } catch (error) {
             console.error(error);
@@ -73,13 +84,13 @@ const Admin = (props) => {
     };
     useEffect(() => {
         try {
-            // handleAllProduct();
+            handleAllProduct();
             toast.success("Success get all products");
         } catch (err) {
             console.log(err);
             toast.error("Don't get all products");
         }
-    }, []);
+    }, [page]);
     const handleEditProduct = () => {};
     const handledDeleteProduct = async (id) => {
         const token = localStorage.getItem("token");
@@ -156,13 +167,10 @@ const Admin = (props) => {
                 </Row>
                 <Row>
                     <Col xs="auto" className="my-1">
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit">Thêm sản phẩm</Button>
                     </Col>
                 </Row>
             </Form>
-            <Button type="button" onClick={() => handleAllProduct()}>
-                Show All Products
-            </Button>
             <div className="admin-table-products col-11">
                 <Table striped bordered hover>
                     <thead>
@@ -180,7 +188,7 @@ const Admin = (props) => {
                                 <tr key={e.id}>
                                     <td>{e.id}</td>
                                     <td>{e.name}</td>
-                                    <td>{e.price}</td>
+                                    <td>{formatVND(e.price)}</td>
                                     <td style={{ textAlign: "center" }}>
                                         <Image
                                             src={`http://localhost:3000/uploads/${e.image}`}
@@ -208,6 +216,56 @@ const Admin = (props) => {
                         })}
                     </tbody>
                 </Table>
+            </div>
+            <div className="pagination">
+                <Pagination>
+                    <Pagination.First
+                        onClick={() => {
+                            if (page > 5) {
+                                setPage(page - 5);
+                            }
+                        }}
+                    />
+                    <Pagination.Prev
+                        onClick={() => {
+                            if (page > 1) {
+                                setPage(page - 1);
+                            }
+                        }}
+                    />
+                    <Pagination.Item
+                        className="custom-page-item"
+                        id="main-page"
+                    >
+                        {page}
+                    </Pagination.Item>
+                    <Pagination.Item onClick={() => setPage(page + 1)}>
+                        {page + 1}
+                    </Pagination.Item>
+                    <Pagination.Item onClick={() => setPage(page + 2)}>
+                        {page + 2}
+                    </Pagination.Item>
+                    <Pagination.Item onClick={() => setPage(page + 3)}>
+                        {page + 3}
+                    </Pagination.Item>
+                    <Pagination.Item onClick={() => setPage(page + 4)}>
+                        {page + 4}
+                    </Pagination.Item>
+                    <Pagination.Next
+                        onClick={() => {
+                            if (page < totalPages) {
+                                setPage(page + 1);
+                            }
+                        }}
+                    />
+                    <Pagination.Last
+                        onClick={() => {
+                            if (page + 5 < totalPages) {
+                                setPage(page + 5);
+                            }
+                        }}
+                    />
+                </Pagination>
             </div>
             <ToastContainer
                 position="top-right"
